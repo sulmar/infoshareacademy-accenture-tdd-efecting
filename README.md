@@ -12,7 +12,7 @@ Do rozpoczęcia tego kursu potrzebujesz następujących rzeczy:
 ## Przygotowanie
 1. Sklonuj repozytorium Git
 ```
-git clone infoshareacademy-accenture-tdd-efecting
+git clone https://github.com/sulmar/infoshareacademy-accenture-tdd-efecting
 ```
 2. Zbuduj
 ```
