@@ -1,12 +1,131 @@
 ## Kilka zasad pisania czystego kodu w C#
 
-### 1. Nazwy metod i klas
-- Nazwy metod powinny być czasownikami lub frazami czasownikowymi i zaczynać się wielką literą, np. `CalculateTotal`, `SendEmail`.
-- Nazwy klas powinny być rzeczownikami i również zaczynać się wielką literą, np. `Customer`, `Invoice`.
+### 1. Nazwy klas
+Nazwy klas powinny być rzeczownikami i również zaczynać się wielką literą, np. `Customer`, `Invoice`.
+
+Źle
+```csharp
+public class Calculate
+{    
+    public decimal Salary()
+    {
+        // Implementacja metody obliczającej wynagrodzenie
+    }
+
+}
+
+public class Validate
+{
+    public bool Email(string email)
+    {
+        // Implementacja metody walidującej email
+        throw new NotImplementedException();
+    }
+}
+
+public class Send
+{
+    public void Send()
+    {
+        // Implementacja metody wysyłania
+        throw new NotImplementedException();
+    }
+}
+```
+
+Dobrze
+```csharp
+public class SalaryCalculator
+{    
+    public decimal Calculate()
+    {
+        // Implementacja metody obliczającej wynagrodzenie
+    }
+}
+
+public class EmailValidator
+{
+    public bool Validate(string email)
+    {
+        // Implementacja metody walidującej email
+    }
+}
+
+public class SendCommand
+{
+    public void Execute()
+    {
+        // Implementacja metody wysyłania
+        throw new NotImplementedException();
+    }
+}
+
+```
+
+
+## 2. Nazwy metod
+
+ Nazwy metod powinny być czasownikami lub frazami czasownikowymi i zaczynać się wielką literą, np. `CalculateTotal`, `SendEmail`.
+
+Źle
+```csharp
+public class Order
+{    
+    public void Payment()
+    {
+        // Implementacja metody przetwarzającej płatność
+    }
+
+    public void Confirmation()
+    {
+        // Implementacja metody potwierdzającej zamówienie
+    }    
+}
+```
+
+Dobrze
+
+```csharp
+public class Order
+{    
+    public void ProcessPayment()
+    {
+        // Implementacja metody przetwarzającej płatność
+    }
+
+    public void Confirm()
+    {
+        // Implementacja metody potwierdzającej zamówienie
+    }
+}
+```
+
+
+
 
 ### 2. Nazwy parametrów
 - Powinny być opisowe i zaczynać się małą literą, np. `customerId`, `totalAmount`.
 
+Źle
+```csharp
+public class Order
+{    
+    public DateTime Date { get; set; }    
+    public string Status { get; set; }
+    public decimal Amount { get; set; }
+}
+```
+
+Dobrze
+```csharp
+public class Order
+{    
+    public DateTime DeliveryDate { get; set; }  
+    public string OrderStatus { get; set; }
+    public decimal TotalAmount { get; set; }
+    public decimal TaxAmount { get; set; }
+}
+```
 
 ### 3. Ilość parametrów
 Zaleca się, aby metody miały maksymalnie trzy-cztery parametry. Jeśli potrzeba więcej, rozważ utworzenie obiektu zawierającego te parametry.
@@ -44,6 +163,73 @@ public void ProcessOrder(OrderInfo orderInfo)
 ### 4. Konwencje nazewnicze
 - Używaj notacji PascalCase dla nazw typów (klas, interfejsów, metod).
 - Używaj notacji camelCase dla zmiennych lokalnych i parametrów.
+
+1. Metody, zmienne, pola i właściwości logiczne powinny być prefiksowane z `is`, `has`, `can`
+
+Źle
+```csharp
+public bool Validate(int number);
+public bool Available();
+public bool Active();
+public bool Enabled();
+public bool Open();
+public bool Completed();
+public bool LoggedIn();
+public bool Edit();
+```
+
+Dobrze
+```csharp
+public bool IsValidNumber(int number);
+public bool IsAvailable();
+public bool IsActive();
+public bool IsEnabled();
+public bool IsOpen();
+public bool IsCompleted();
+public bool IsLoggedIn();
+public bool CanEdit();
+public bool CanChangePassword();
+public bool HasPermission(string permission);
+```
+
+2. Metody, zmienne, pola i właściwości logiczne powinny używać pozytywnych nazw, aby uniknąć podwójnych zaprzeczeń.
+
+Źle
+```csharp
+public bool IsInvalidNumber(int number);
+```
+
+Dobrze
+```csharp
+public bool IsValidNumber(int number);
+```
+
+3. Metody testowe powinny być nazywane zgodnie z konwencją:
+`Method_WhenScenario_ShouldExpectedBehavior` lub `Method_ShouldExpectedBehavior_WhenScenario`
+
+Obie konwencje są poprawne, a wybór pomiędzy nimi może zależeć od preferencji zespołu oraz konkretnego kontekstu testów. Kluczowe jest, aby nazwy metod testowych były:
+
+1. **Opisowe**: Wyraźnie określały, co jest testowane.
+2. **Czytelne**: Były łatwe do zrozumienia przez każdego czytającego kod testowy.
+3. **Spójne**: Przestrzegały spójnego wzorca nazewnictwa w całym kodzie.
+
+Źle
+```csharp
+public bool Test_GoodFlow();
+public bool Test_BadFlow();
+public bool Id_1_Returns_Movie();
+public bool Id_666_Returns_Exception();
+public bool WhenCallingGetMovieWithId666ShouldThrowsException();
+public bool WhenCallingGetMovieWithId1ShouldReturnsMovie();
+```
+
+Dobrze
+```csharp
+public bool GetMovie_WhenIdIsValid_ShouldReturnsMovie();
+public bool GetMovie_WhenIdIsInvalid_ShouldThrowsException();
+```
+
+
 
 ### 5. Formatowanie
 - Zadbaj o odpowiednie wcięcia kodu (zazwyczaj cztery spacje).
