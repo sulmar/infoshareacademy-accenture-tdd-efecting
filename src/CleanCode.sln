@@ -5,9 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters", "CleanCode\Parameters\Parameters.csproj", "{D68F8667-27B8-4220-BCD4-6C0CB26CBB17}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CleanCode", "CleanCode", "{0C2CFD46-F187-4967-9EF1-AEB082964B24}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicNumbers", "CleanCode\MagicNumbers\MagicNumbers.csproj", "{18FB3B22-5FE2-4817-A4AC-5608783C6600}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicNumbers", "CleanCode\MagicNumbers\MagicNumbers.csproj", "{18FB3B22-5FE2-4817-A4AC-5608783C6600}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,8 +27,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5BD943B9-2E2D-498B-967F-BCDD7527C170}
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{18FB3B22-5FE2-4817-A4AC-5608783C6600} = {0C2CFD46-F187-4967-9EF1-AEB082964B24}
 	EndGlobalSection
 EndGlobal
