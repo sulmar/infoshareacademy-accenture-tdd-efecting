@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters", "CleanCode\Par
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicNumbers", "CleanCode\MagicNumbers\MagicNumbers.csproj", "{18FB3B22-5FE2-4817-A4AC-5608783C6600}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NamingConventions", "CleanCode\NamingConventions\NamingConventions.csproj", "{69EBA675-43F2-47E0-BE71-DDA4B0C193DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{18FB3B22-5FE2-4817-A4AC-5608783C6600}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18FB3B22-5FE2-4817-A4AC-5608783C6600}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18FB3B22-5FE2-4817-A4AC-5608783C6600}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69EBA675-43F2-47E0-BE71-DDA4B0C193DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69EBA675-43F2-47E0-BE71-DDA4B0C193DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69EBA675-43F2-47E0-BE71-DDA4B0C193DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69EBA675-43F2-47E0-BE71-DDA4B0C193DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
