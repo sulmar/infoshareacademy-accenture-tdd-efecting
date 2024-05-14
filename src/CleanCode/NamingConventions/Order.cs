@@ -2,6 +2,7 @@
 
 public class Order
 {
+    public string Info { get; set; }
     public DateTime Date { get; set; }
     public Status Status { get; set; }
     public decimal Amount { get; set; }
@@ -15,6 +16,9 @@ public class Order
     {
         // Implementacja metody potwierdzającej zamówienie
     }
+
+    public decimal Calculate;
+    public decimal GetTotal { get; set; }
 }
 
 public enum Status { Pending, Processing, Completed }

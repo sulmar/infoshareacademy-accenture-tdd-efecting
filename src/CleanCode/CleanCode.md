@@ -112,7 +112,9 @@ public class Order
 {    
     public DateTime Date { get; set; }    
     public string Status { get; set; }
-    public decimal Amount { get; set; }
+    public decimal Amount { get; set; }    
+    public decimal GetTotalAmount { get; set; }
+    public decimal Calculate { get; set; }
 }
 ```
 
@@ -124,6 +126,9 @@ public class Order
     public string OrderStatus { get; set; }
     public decimal TotalAmount { get; set; }
     public decimal TaxAmount { get; set; }
+
+     public decimal TotalAmount { get; set; }
+     public decimal Calculate();
 }
 ```
 
