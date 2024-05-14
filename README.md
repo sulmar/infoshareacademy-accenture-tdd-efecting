@@ -3,7 +3,7 @@
 
 ## Wprowadzenie
 
-Witaj w repozytorium z materiałami do szkolenia **Techniki efektywnego testowania kodu **.
+Witaj w repozytorium z materiałami do szkolenia **Techniki efektywnego testowania kodu**.
 
 Do rozpoczęcia tego kursu potrzebujesz następujących rzeczy:
 
