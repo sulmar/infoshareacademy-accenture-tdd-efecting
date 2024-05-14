@@ -103,7 +103,7 @@ public class Order
 
 
 
-### 2. Nazwy parametrów
+### 3. Nazwy parametrów
 - Powinny być opisowe i zaczynać się małą literą, np. `customerId`, `totalAmount`.
 
 Źle
@@ -132,7 +132,7 @@ public class Order
 }
 ```
 
-### 3. Ilość parametrów
+### 4. Ilość parametrów
 Zaleca się, aby metody miały maksymalnie trzy-cztery parametry. Jeśli potrzeba więcej, rozważ utworzenie obiektu zawierającego te parametry.
 
 Ten sposób nazywa się **Parameter Object**. 
@@ -165,7 +165,7 @@ public void ProcessOrder(OrderInfo orderInfo)
 ```
 
 
-### 4. Konwencje nazewnicze
+### 5. Konwencje nazewnicze
 - Używaj notacji PascalCase dla nazw typów (klas, interfejsów, metod).
 - Używaj notacji camelCase dla zmiennych lokalnych i parametrów.
 
@@ -236,14 +236,14 @@ public bool GetMovie_WhenIdIsInvalid_ShouldThrowsException();
 
 
 
-### 5. Formatowanie
+### 6. Formatowanie
 - Zadbaj o odpowiednie wcięcia kodu (zazwyczaj cztery spacje).
 - Rozdzielaj logiczne bloki kodu pustymi liniami, aby poprawić czytelność.
 
-### 6. Jedna odpowiedzialność
+### 7. Jedna odpowiedzialność
 - Klasy i metody powinny mieć jedną odpowiedzialność, co ułatwia zrozumienie i testowanie kodu.
 
-### 7. Komentarze
+### 8. Komentarze
 - Komentarze powinny być używane do wyjaśnienia „dlaczego” coś jest robione, a nie „jak”. Kod powinien być na tyle czytelny, aby nie wymagał komentarzy do zrozumienia, jak działa.
 
 Źle:
@@ -375,6 +375,198 @@ public class Order
             default:
                 return "Unknown";
         }
+    }
+}
+```
+
+9. Wyjątki
+
+Źle
+```csharp
+public class SenderService
+{
+    public bool SendEmail(string recipient, string subject, string body)
+    {
+        if (string.IsNullOrEmpty(recipient) || !recipient.Contains("@"))
+        {
+            return false;           
+        }
+
+        if (body.Length > 1000)
+        {
+            return false;
+        }
+
+        try
+        {
+            using (var client = new SmtpClient("smtp.example.com"))
+            {
+                // Konfiguracja klienta SMTP (np. ustawienia portu, poświadczenia itp.)
+                client.Port = 587;
+                client.Credentials = new System.Net.NetworkCredential("username", "password");
+                client.EnableSsl = true;
+
+                var mailMessage = new MailMessage("sender@example.com", recipient, subject, body);
+                client.Send(mailMessage);
+
+                return true;
+            }
+        }
+        catch (SmtpException ex)
+        {
+            Console.WriteLine($"Problem z połączeniem SMTP: {ex.Message}");
+            return false;
+        }
+        catch (Exception ex)
+        {            
+            Console.WriteLine($"Wystąpił nieoczekiwany błąd podczas wysyłania e-maila: {ex.Message}");
+            return false;
+        }
+    }
+}
+```
+
+Problemy w pierwotnym kodzie:
+1. Brak informacji o przyczynie niepowodzenia
+2. Niewystarczająca walidacja adresu e-mail
+3. Zbyt ogólna obsługa wyjątków
+4. Bezpośrednie wypisywanie błędów do konsoli
+
+
+Dobrze
+1. Użycie wyjątków zamiast wartości zwracanych
+2. Walidacja adresu e-mail przy użyciu klasy MailAddress, co zapewnia dokładniejszą walidację formatu adresu e-mail.
+3. Zdefiniowane są specyficzne wyjątki (InvalidEmailException, MessageBodyTooLongException, SmtpConnectionException), które są rzucane w odpowiednich sytuacjach błędów.
+4. Brak bezpośredniego wypisywania do konsoli. Wyjątki są propagowane, co pozwala wyższej warstwie aplikacji na odpowiednie logowanie i obsługę błędów.
+
+```csharp
+using System;
+
+public class InvalidEmailException : Exception
+{
+    public InvalidEmailException(string message) : base(message)
+    {
+    }
+}
+
+public class MessageBodyTooLongException : Exception
+{
+    public MessageBodyTooLongException(string message) : base(message)
+    {
+    }
+}
+
+public class SmtpConnectionException : Exception
+{
+    public SmtpConnectionException(string message) : base(message)
+    {
+    }
+}
+```
+
+
+- Użycie własnych wyjątków
+``` csharp
+using System;
+using System.Net.Mail;
+
+public class SenderService
+{
+    private const int MaxBodyLength = 1000;
+
+    public void SendEmail(string recipient, string subject, string body)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(recipient) || !recipient.Contains("@"))
+            {
+                throw new InvalidEmailException("Podano nieprawidłowy adres e-mail.");
+            }
+
+            if (body.Length > MaxBodyLength)
+            {
+                throw new MessageBodyTooLongException($"Treść wiadomości jest za długa. Maksymalna długość to {MaxBodyLength} znaków.");
+            }
+
+            using (var client = new SmtpClient("smtp.example.com"))
+            {
+                // Konfiguracja klienta SMTP (np. ustawienia portu, poświadczenia itp.)
+                client.Port = 587;
+                client.Credentials = new System.Net.NetworkCredential("username", "password");
+                client.EnableSsl = true;
+
+                var mailMessage = new MailMessage("sender@example.com", recipient, subject, body);
+                client.Send(mailMessage);
+            }
+        }
+        catch (InvalidEmailException)
+        {
+            // Propagowanie własnych wyjątków do wyższej warstwy
+            throw;
+        }
+        catch (MessageBodyTooLongException)
+        {
+            // Propagowanie własnych wyjątków do wyższej warstwy
+            throw;
+        }
+        catch (SmtpException ex)
+        {
+            // Zgłoszenie wyjątku specyficznego dla problemów z SMTP
+            throw new SmtpConnectionException($"Problem z połączeniem SMTP: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            // Ogólna obsługa wyjątków, która może być użyteczna do logowania błędów
+            throw new Exception($"Wystąpił nieoczekiwany błąd podczas wysyłania e-maila: {ex.Message}");
+        }
+    }
+}
+```
+
+``` csharp
+using System;
+using Xunit;
+
+public class SenderServiceTests
+{
+    [Fact]
+    public void SendEmail_InvalidEmail_ThrowsInvalidEmailException()
+    {
+        // Arrange
+        var senderService = new SenderService();
+        string invalidEmail = "invalid-email";
+        string subject = "Test Subject";
+        string body = "Test Body";
+
+        // Act & Assert
+        Assert.Throws<InvalidEmailException>(() => senderService.SendEmail(invalidEmail, subject, body));
+    }
+
+    [Fact]
+    public void SendEmail_BodyTooLong_ThrowsMessageBodyTooLongException()
+    {
+        // Arrange
+        var senderService = new SenderService();
+        string validEmail = "valid@example.com";
+        string subject = "Test Subject";
+        string longBody = new string('a', 1001); // Body with 1001 characters
+
+        // Act & Assert
+        Assert.Throws<MessageBodyTooLongException>(() => senderService.SendEmail(validEmail, subject, longBody));
+    }
+
+    [Fact]
+    public void SendEmail_ValidInput_SendsEmailWithoutExceptions()
+    {
+        // Arrange
+        var senderService = new SenderService();
+        string validEmail = "valid@example.com";
+        string subject = "Test Subject";
+        string body = "Test Body";
+
+        // Act & Assert
+        var exception = Record.Exception(() => senderService.SendEmail(validEmail, subject, body));
+        Assert.Null(exception);
     }
 }
 ```
