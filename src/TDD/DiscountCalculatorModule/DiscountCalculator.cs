@@ -2,11 +2,11 @@
 
 public class DiscountCalculator
 {
-    DiscountFactory discountFactory;
+    private readonly DiscountFactory _discountFactory;
 
-    public DiscountCalculator()
+    public DiscountCalculator(DiscountFactory discountFactory)
     {
-        discountFactory = new DiscountFactory();
+        _discountFactory = discountFactory;
     }
 
 
@@ -17,37 +17,8 @@ public class DiscountCalculator
         if (string.IsNullOrEmpty(discountCode))
             return price;
 
-       var discount = discountFactory.Create(discountCode);
+       var discount = _discountFactory.Create(discountCode);
 
         return price - price * discount;
-    }
-}
-
-// Fabryka 
-public class DiscountFactory
-{
-    private Dictionary<string, (decimal discount, bool isPernament)> discountCodes = [];
-
-    public DiscountFactory()
-    {
-        discountCodes = new()
-        {
-            ["SAVE10NOW"] = (0.1m, true),
-            ["DISCOUNT20OFF"] = (0.2m, true),
-            ["ABC"] = (0.5m, false),
-        };
-    }
-
-    public decimal Create(string discountCode) 
-    {
-        if (discountCodes.TryGetValue(discountCode, out var discount))
-        {
-            if (!discount.isPernament)
-                discountCodes.Remove(discountCode);
-
-            return discount.discount;
-        }
-        else
-            throw new ArgumentException("Invalid discount code");
     }
 }

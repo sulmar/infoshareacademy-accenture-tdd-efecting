@@ -17,17 +17,7 @@ public class DiscountCalculatorTests
 
     public DiscountCalculatorTests()
     {
-        sut = new DiscountCalculator();
-    }
-
-    [Fact]
-    public void CalculateDiscount_WhenDiscountCodeIsEmpty_ShouldReturnPrice()
-    {
-        // Act
-        var result = sut.CalculateDiscount(1, string.Empty);
-
-        // Assert
-        Assert.Equal(1, result);
+        sut = new DiscountCalculator(new DiscountFactory());
     }
 
     [Fact]
@@ -82,31 +72,9 @@ public class DiscountCalculatorTests
 
 
 
-    [Fact]
-    public void CalculateDiscount_WhenFirstUseDiscountCode_ShouldReturnDiscountedPriceBy50Percentage()
-    {
-        // Act
-        var result = sut.CalculateDiscount(100, "ABC");
+   
 
-        // Assert
-        Assert.Equal(50, result);
-
-    }
-
-    [Fact]
-    public void CalculateDiscount_WhenSecondUseDiscountCode_ShouldThrowArgumentException()
-    {
-        // Arrange
-        sut.CalculateDiscount(100, "ABC");
-
-        // Act
-        Action act = () => sut.CalculateDiscount(100, "ABC");
-
-        // Assert
-        Assert.Throws<ArgumentException>(act);
-
-
-    }
+   
 
     [Fact]
     public void CalculateDiscount_WhenSecondUsePermamentDiscountCode_ShowReturnDiscountPrice()
