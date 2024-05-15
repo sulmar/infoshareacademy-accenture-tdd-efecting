@@ -2,20 +2,40 @@
 
 namespace Exceptions;
 
+public class InvalidEmailException : Exception
+{
+    public InvalidEmailException(string message)
+        : base(message)
+    {
+        
+    }
+}
+
+public class MessageBodyTooLongException : Exception
+{
+    public int CurrentBodyLength { get; private set; }
+
+    public MessageBodyTooLongException(string message, int currentBodyLength) 
+        : base(message)
+    {
+        this.CurrentBodyLength = currentBodyLength;
+    }
+}
+
 public class SenderService
 {
     private const int MaxBodyLength = 1000;
 
-    public bool SendEmail(string recipient, string subject, string body)
+    public void SendEmail(string recipient, string subject, string body)
     {
         if (string.IsNullOrEmpty(recipient) || !recipient.Contains("@"))
         {
-            return false;           
+            throw new InvalidEmailException("Błędny adres email");
         }
 
         if (body.Length > MaxBodyLength)
         {
-            return false;
+            throw new MessageBodyTooLongException("Przekroczono rozmiar wiadomości", body.Length);
         }
 
         try
@@ -30,18 +50,14 @@ public class SenderService
                 var mailMessage = new MailMessage("sender@example.com", recipient, subject, body);
                 client.Send(mailMessage);
 
-                return true;
             }
         }
         catch (SmtpException ex)
         {
-            Console.WriteLine($"Problem z połączeniem SMTP: {ex.Message}");
-            return false;
+            Console.WriteLine(value: $"Problem z połączeniem SMTP: {ex.Message}");
+
+            throw;
         }
-        catch (Exception ex)
-        {            
-            Console.WriteLine($"Wystąpił nieoczekiwany błąd podczas wysyłania e-maila: {ex.Message}");
-            return false;
-        }
+        
     }
 }
