@@ -2,13 +2,15 @@
 
 public class Order
 {
-    public double TotalAmount { get; set; }
-    public int OrderStatus { get; set; }
+    public decimal TotalAmount { get; set; }
+    public OrderStatus OrderStatus { get; set; }
 
-    public double ApplyDiscount()
+    private const decimal DiscountRatePercentage = 0.1m; // 10%
+
+    public decimal ApplyDiscount()
     {
         // Magiczna liczba 0.1
-        return TotalAmount * 0.9;
+        return TotalAmount - TotalAmount * DiscountRatePercentage;
     }
 }
 
@@ -17,21 +19,19 @@ public class OrderService
 {
     public void Process(Order order)
     {
-        if (order.OrderStatus == 0)
+        switch (order.OrderStatus)
         {
-            // Pending
-        }
-        else if (order.OrderStatus == 1)
-        {
-            // Processing 
-        }
-        else if (order.OrderStatus == 2)
-        {
-            // Completed
-        }
+            case OrderStatus.Pending:
+                break;
+            case OrderStatus.Processing:
+                break;
+            case OrderStatus.Completed:
+                break;
 
-
+            default:
+                throw new NotSupportedException();
+        }
     }
-
-
 }
+
+public enum OrderStatus { Pending, Processing, Completed }
