@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Fundamentals Principles.md",
+                "file": "SOLID Principles.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Fundamentals Principles.md",
+                "file": "SOLID Principles.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Fundamentals Principles.md",
+                "file": "SOLID Principles.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Fundamentals Principles.md"
+                "file": "SOLID Principles.md"
               }
             }
           }
@@ -148,9 +148,9 @@
   },
   "active": "a26c4e5ba9737f4c",
   "lastOpenFiles": [
-    "Spis treści.md",
     "Fundamentals Principles.md",
     "CleanCode.md",
-    "SOLID Principles.md"
+    "SOLID Principles.md",
+    "Spis treści.md"
   ]
 }
