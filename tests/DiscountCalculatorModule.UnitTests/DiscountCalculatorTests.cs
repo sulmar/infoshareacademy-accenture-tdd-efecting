@@ -35,4 +35,17 @@ public class DiscountCalculatorTests
         // Assert
         Assert.Equal(90, result);
     }
+
+    [Fact]
+    public void CalculateDiscount_WhenDiscountCodeIsDISCOUNT20OFF_ShouldReturnsDiscountedPriceBy20Percentage()
+    {
+        // Arrange
+        DiscountCalculator sut = new DiscountCalculator();
+
+        // Act
+        var result = sut.CalculateDiscount(100, "DISCOUNT20OFF");
+
+        // Assert
+        Assert.Equal(80, result);
+    }
 }
