@@ -1,4 +1,4 @@
-## Ćwiczenie - kalkulator projekt budowlanym
+## Ćwiczenie - kalkulator projekt budowlany
 
 ## Wprowadzenie
 
