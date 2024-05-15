@@ -10,7 +10,7 @@ public class DiscountCalculatorTests
 
 
     [Fact]
-    public void CalculateDiscount_EmptyDiscountCode_ShouldReturnsPrice()
+    public void CalculateDiscount_WhenDiscountCodeIsEmpty_ShouldReturnsPrice()
     {
         // Arange
         DiscountCalculator discountCalculator = new DiscountCalculator();
@@ -20,5 +20,18 @@ public class DiscountCalculatorTests
 
         // Assert
         Assert.Equal(1, result);
+    }
+
+    [Fact]
+    public void CalculateDiscount_WhenDiscountCodeIsSAVE10NOW_ShouldReturnsDiscountedPriceBy10Percentage()
+    {
+        // Arrange
+        DiscountCalculator discountCalculator = new DiscountCalculator();
+
+        // Act
+        var result = discountCalculator.CalculateDiscount(100, "SAVE10NOW");
+
+        // Assert
+        Assert.Equal(90, result);
     }
 }
