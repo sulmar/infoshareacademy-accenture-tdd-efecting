@@ -72,4 +72,52 @@ public class DiscountCalculatorTests
         var exception = Assert.Throws<ArgumentException>(act);
         Assert.Equal("Invalid discount code", exception.Message);
     }
+
+    //  Dodaj rabat 50%, który jest naliczany jednorazowo na podstawie kodu z puli kodów.
+
+
+    // jesli kod nie byl wczesniej uzyty - pierwszy raz
+    // jesli kod byl wczesniej uzyty - drugi raz
+    // jesli kod byl wczesniej uzyty - trzeci raz
+
+
+
+    [Fact]
+    public void CalculateDiscount_WhenFirstUseDiscountCode_ShouldReturnDiscountedPriceBy50Percentage()
+    {
+        // Act
+        var result = sut.CalculateDiscount(100, "ABC");
+
+        // Assert
+        Assert.Equal(50, result);
+
+    }
+
+    [Fact]
+    public void CalculateDiscount_WhenSecondUseDiscountCode_ShouldThrowArgumentException()
+    {
+        // Arrange
+        sut.CalculateDiscount(100, "ABC");
+
+        // Act
+        Action act = () => sut.CalculateDiscount(100, "ABC");
+
+        // Assert
+        Assert.Throws<ArgumentException>(act);
+
+
+    }
+
+    [Fact]
+    public void CalculateDiscount_WhenSecondUsePermamentDiscountCode_ShowReturnDiscountPrice()
+    {
+        // Arrange
+        sut.CalculateDiscount(100, "SAVE10NOW");
+
+        // Act
+        var result = sut.CalculateDiscount(100, "SAVE10NOW");
+
+        // Assert
+        Assert.Equal(90, result);
+    }
 }

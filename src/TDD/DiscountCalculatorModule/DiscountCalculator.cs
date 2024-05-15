@@ -3,14 +3,15 @@
 public class DiscountCalculator
 {
 
-    private Dictionary<string, decimal> discountCodes = [];
+    private Dictionary<string, (decimal discount, bool isPernament)> discountCodes = [];
 
     public DiscountCalculator()
     {
         discountCodes = new()
         {
-            ["SAVE10NOW"] = 0.1m,
-            ["DISCOUNT20OFF"] = 0.2m,
+            ["SAVE10NOW"] = (0.1m, true),
+            ["DISCOUNT20OFF"] = (0.2m, true),
+            ["ABC"] = (0.5m, false),
         };
     }
 
@@ -24,7 +25,10 @@ public class DiscountCalculator
 
         if (discountCodes.TryGetValue(discountCode, out var discount))
         {
-            return price - price * discount;
+            if (!discount.isPernament)
+                discountCodes.Remove(discountCode);
+
+            return price - price * discount.discount;
         }
         else
             throw new ArgumentException("Invalid discount code");
