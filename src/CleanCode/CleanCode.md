@@ -379,7 +379,7 @@ public class Order
 }
 ```
 
-9. Wyjątki
+### 9. Wyjątki
 
 Źle
 ```csharp
