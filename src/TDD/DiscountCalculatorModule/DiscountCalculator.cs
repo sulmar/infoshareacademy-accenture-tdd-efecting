@@ -17,8 +17,13 @@ public class DiscountCalculator
         if (string.IsNullOrEmpty(discountCode))
             return price;
 
-       var discount = _discountFactory.Create(discountCode);
+        var discount = _discountFactory.Create(discountCode);
 
+        return CalculateByPercentageDiscount(price, discount);
+    }
+
+    private static decimal CalculateByPercentageDiscount(decimal price, decimal discount)
+    {
         return price - price * discount;
     }
 }
