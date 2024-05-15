@@ -1,22 +1,18 @@
 {
   "main": {
-    "id": "b586b4f9134005d2",
+    "id": "f76e2f396e0f2c9c",
     "type": "split",
     "children": [
       {
-        "id": "37dccb89d8c58d3e",
+        "id": "1afa3557bbe71732",
         "type": "tabs",
         "children": [
           {
-            "id": "a26c4e5ba9737f4c",
+            "id": "2bcb33d7eca6065a",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Fundamentals Principles.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -25,15 +21,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "1777a6b324267a49",
+    "id": "1b1a48213463f24e",
     "type": "split",
     "children": [
       {
-        "id": "675fff0a6e16d16c",
+        "id": "0bb818cbab04e359",
         "type": "tabs",
         "children": [
           {
-            "id": "10106286c90d529d",
+            "id": "e8c50adc8ec2c4a7",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -43,7 +39,7 @@
             }
           },
           {
-            "id": "2930249156772ae7",
+            "id": "4fa3686b1e81af97",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -58,7 +54,7 @@
             }
           },
           {
-            "id": "1aeaee6a6c9dafef",
+            "id": "283908d8a085fe76",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -69,23 +65,22 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300
   },
   "right": {
-    "id": "0e9fb8cb9661091f",
+    "id": "3a7c59d326aa05ce",
     "type": "split",
     "children": [
       {
-        "id": "952d6e4ad8d1a507",
+        "id": "a9ac0ef357970c2e",
         "type": "tabs",
         "children": [
           {
-            "id": "339ac0835c1bfa31",
+            "id": "ee1dbf8d6da077c5",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Fundamentals Principles.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,19 +92,18 @@
             }
           },
           {
-            "id": "a779458afa8b0207",
+            "id": "56e62566b828cf40",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Fundamentals Principles.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "035932d9552f9b69",
+            "id": "2da07a4ea48dd244",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -120,13 +114,11 @@
             }
           },
           {
-            "id": "fe496aded51641c7",
+            "id": "c25002292b853909",
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Fundamentals Principles.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -146,11 +138,6 @@
       "command-palette:Otwórz paletę poleceń": false
     }
   },
-  "active": "a26c4e5ba9737f4c",
-  "lastOpenFiles": [
-    "Spis treści.md",
-    "Fundamentals Principles.md",
-    "CleanCode.md",
-    "SOLID Principles.md"
-  ]
+  "active": "2bcb33d7eca6065a",
+  "lastOpenFiles": []
 }

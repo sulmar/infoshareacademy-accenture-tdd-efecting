@@ -1,5 +1,5 @@
 
-- [[Zasady Rozwoju Oprogramowania]]
+- [[CleanCode]]
+- [[Fundamentals Principles]]
 - [[SOLID Principles]] 
 
-When you're ready, delete this note and make the vault your own.
