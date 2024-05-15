@@ -48,4 +48,19 @@ public class DiscountCalculatorTests
         // Assert
         Assert.Equal(80, result);
     }
+
+    [Fact]
+    public void CalculateDiscount_WhenPriceIsNegative_ShouldThrowsArgumentException()
+    {
+        // Arrange
+        DiscountCalculator sut = new DiscountCalculator();
+
+        // Act
+        Action act = () => sut.CalculateDiscount(-1, string.Empty);
+
+        // Assert
+        var exception = Assert.Throws<ArgumentException>(act);
+        Assert.Equal("Negatives not allowed", exception.Message);
+
+    }
 }
