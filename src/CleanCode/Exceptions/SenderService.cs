@@ -4,6 +4,8 @@ namespace Exceptions;
 
 public class SenderService
 {
+    private const int MaxBodyLength = 1000;
+
     public bool SendEmail(string recipient, string subject, string body)
     {
         if (string.IsNullOrEmpty(recipient) || !recipient.Contains("@"))
@@ -11,7 +13,7 @@ public class SenderService
             return false;           
         }
 
-        if (body.Length > 1000)
+        if (body.Length > MaxBodyLength)
         {
             return false;
         }
