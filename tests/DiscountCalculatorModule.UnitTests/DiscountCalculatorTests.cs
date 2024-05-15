@@ -8,15 +8,16 @@ public class DiscountCalculatorTests
 
     // Method_ShouldExpectedBehavior_WhenScenario
 
+    // SUT = System Under Test
 
     [Fact]
     public void CalculateDiscount_WhenDiscountCodeIsEmpty_ShouldReturnsPrice()
     {
         // Arange
-        DiscountCalculator discountCalculator = new DiscountCalculator();
+        DiscountCalculator sut = new DiscountCalculator();
 
         // Act
-        var result = discountCalculator.CalculateDiscount(1, string.Empty);
+        var result = sut.CalculateDiscount(1, string.Empty);
 
         // Assert
         Assert.Equal(1, result);
@@ -26,10 +27,10 @@ public class DiscountCalculatorTests
     public void CalculateDiscount_WhenDiscountCodeIsSAVE10NOW_ShouldReturnsDiscountedPriceBy10Percentage()
     {
         // Arrange
-        DiscountCalculator discountCalculator = new DiscountCalculator();
+        DiscountCalculator sut = new DiscountCalculator();
 
         // Act
-        var result = discountCalculator.CalculateDiscount(100, "SAVE10NOW");
+        var result = sut.CalculateDiscount(100, "SAVE10NOW");
 
         // Assert
         Assert.Equal(90, result);
