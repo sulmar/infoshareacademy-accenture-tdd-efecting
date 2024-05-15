@@ -10,12 +10,19 @@ public class DiscountCalculatorTests
 
     // SUT = System Under Test
 
-    [Fact]
-    public void CalculateDiscount_WhenDiscountCodeIsEmpty_ShouldReturnsPrice()
-    {
-        // Arange
-        DiscountCalculator sut = new DiscountCalculator();
+    const string InvalidDiscountCode = "a";
 
+
+    DiscountCalculator sut;
+
+    public DiscountCalculatorTests()
+    {
+        sut = new DiscountCalculator();
+    }
+
+    [Fact]
+    public void CalculateDiscount_WhenDiscountCodeIsEmpty_ShouldReturnPrice()
+    {
         // Act
         var result = sut.CalculateDiscount(1, string.Empty);
 
@@ -24,11 +31,8 @@ public class DiscountCalculatorTests
     }
 
     [Fact]
-    public void CalculateDiscount_WhenDiscountCodeIsSAVE10NOW_ShouldReturnsDiscountedPriceBy10Percentage()
+    public void CalculateDiscount_WhenHasDiscountCodeSAVE10NOW_ShouldReturnDiscountedPriceBy10Percentage()
     {
-        // Arrange
-        DiscountCalculator sut = new DiscountCalculator();
-
         // Act
         var result = sut.CalculateDiscount(100, "SAVE10NOW");
 
@@ -37,11 +41,8 @@ public class DiscountCalculatorTests
     }
 
     [Fact]
-    public void CalculateDiscount_WhenDiscountCodeIsDISCOUNT20OFF_ShouldReturnsDiscountedPriceBy20Percentage()
+    public void CalculateDiscount_WhenHasDiscountCodeDISCOUNT20OFF_ShouldReturnDiscountedPriceBy20Percentage()
     {
-        // Arrange
-        DiscountCalculator sut = new DiscountCalculator();
-
         // Act
         var result = sut.CalculateDiscount(100, "DISCOUNT20OFF");
 
@@ -50,11 +51,8 @@ public class DiscountCalculatorTests
     }
 
     [Fact]
-    public void CalculateDiscount_WhenPriceIsNegative_ShouldThrowsArgumentException()
+    public void CalculateDiscount_WhenPriceIsNegative_ShouldThrowArgumentException()
     {
-        // Arrange
-        DiscountCalculator sut = new DiscountCalculator();
-
         // Act
         Action act = () => sut.CalculateDiscount(-1, string.Empty);
 
@@ -65,13 +63,10 @@ public class DiscountCalculatorTests
     }
 
     [Fact]
-    public void CalculateDiscount_WhenDiscountCodeIsInvalid_ShouldThrowsArgumentException()
+    public void CalculateDiscount_WhenHasInvalidDiscountCode_ShouldThrowArgumentException()
     {
-        // Arrange
-        var sut = new DiscountCalculator();
-
         // Act
-        Action act = () => sut.CalculateDiscount(1, "a");
+        Action act = () => sut.CalculateDiscount(1, InvalidDiscountCode);
 
         // Assert
         var exception = Assert.Throws<ArgumentException>(act);
