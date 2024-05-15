@@ -6,7 +6,7 @@ public class DiscountFactoryTests
     public void Create_WhenFirstUseDiscountCode_ShouldReturnDiscount50Percentage()
     {
         // Arrange
-        var sut = new DiscountFactory();
+        var sut = new SingleUseDiscountFactoryProxy(new PernamentDiscountFactory());
 
         // Act
         var result = sut.Create("ABC");
@@ -19,7 +19,7 @@ public class DiscountFactoryTests
     public void Create_WhenSecondUseDiscountCode_ShouldThrowArgumentException()
     {
         // Arrange
-        var sut = new DiscountFactory();
+        var sut = new SingleUseDiscountFactoryProxy(new PernamentDiscountFactory());
         sut.Create("ABC");
 
         // Act
@@ -35,7 +35,7 @@ public class DiscountFactoryTests
     public void Create__WhenDiscountCodeIsEmpty_ShouldReturnDiscountZeroPercentage()
     {
         // Arrange
-        var sut = new DiscountFactory();
+        var sut = new PernamentDiscountFactory();
 
         // Act
         var result = sut.Create(string.Empty);
@@ -48,7 +48,7 @@ public class DiscountFactoryTests
     public void CalculateDiscount_WhenHasDiscountCodeSAVE10NOW_ShouldReturnDiscount10Percentage()
     {
         // Arrange
-        var sut = new DiscountFactory();
+        var sut = new PernamentDiscountFactory();
 
 
         // Act
@@ -62,7 +62,7 @@ public class DiscountFactoryTests
     public void CalculateDiscount_WhenHasDiscountCodeDISCOUNT20OFF_ShouldReturnDiscount20Percentage()
     {
         // Arrange
-        var sut = new DiscountFactory();
+        var sut = new PernamentDiscountFactory();
 
 
         // Act

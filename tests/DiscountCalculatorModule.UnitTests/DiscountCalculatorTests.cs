@@ -17,7 +17,7 @@ public class DiscountCalculatorTests
 
     public DiscountCalculatorTests()
     {
-        sut = new DiscountCalculator(new DiscountFactory());
+        sut = new DiscountCalculator(new PernamentDiscountFactory());
     }
 
     [Fact]

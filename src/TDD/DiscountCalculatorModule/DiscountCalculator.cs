@@ -2,9 +2,9 @@
 
 public class DiscountCalculator
 {
-    private readonly DiscountFactory _discountFactory;
+    private readonly PernamentDiscountFactory _discountFactory;
 
-    public DiscountCalculator(DiscountFactory discountFactory)
+    public DiscountCalculator(PernamentDiscountFactory discountFactory)
     {
         _discountFactory = discountFactory;
     }
