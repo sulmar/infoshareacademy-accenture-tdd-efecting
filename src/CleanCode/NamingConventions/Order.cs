@@ -2,23 +2,35 @@
 
 public class Order
 {
-    public string Info { get; set; }
-    public DateTime Date { get; set; }
-    public Status Status { get; set; }
-    public decimal Amount { get; set; }
+    public string CustomerName { get; set; }
+    public DateTime DeliveryDate { get; set; }
+    public OrderStatus Status { get; set; }
+    public PaymentStatus PaymentStatus { get; set; }
+    public decimal TotalAmount { get; set; }
 
-    public void Payment()
+    public void MakePayment()
     {
         // Implementacja metody przetwarzającej płatność
     }
 
-    public void Confirmation()
+    public void Confirm()
     {
         // Implementacja metody potwierdzającej zamówienie
     }
 
-    public decimal Calculate;
+    public decimal Calculate()
+    {
+        var result = TotalAmount * 0.1m;
+
+        throw new NotImplementedException();
+
+        return result;
+
+    }
+
     public decimal GetTotal { get; set; }
 }
 
-public enum Status { Pending, Processing, Completed }
+public enum OrderStatus { Pending, Processing, Completed }
+
+public enum PaymentStatus {  Awaiting, Confirmed, Canceled }
