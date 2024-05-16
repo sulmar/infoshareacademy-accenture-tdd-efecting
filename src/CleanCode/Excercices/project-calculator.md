@@ -1,8 +1,8 @@
-## Ćwiczenie - kalkulator projekt budowlanym
+## Ćwiczenie - kalkulator projekt budowlany
 
 ## Wprowadzenie
 
-Twoim zadaniem jest stworzenie aplikacji do zarządzania projektem budowlanym, która umożliwi zarządzanie elementami budowlanymi oraz wycenę projektu po złożeniu zamówienia.
+Twoim zadaniem jest stworzenie aplikacji do zarządzania projektem budowlanym, która umożliwi wycenę projektu po złożeniu zamówienia.
 
 ## Zadanie
 
