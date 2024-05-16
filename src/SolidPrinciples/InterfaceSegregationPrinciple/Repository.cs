@@ -5,21 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace InterfaceSegregationPrinciple
-{    
-
-    class DbRepository : IRepository
+{
+    class FakeCustomerRepository : ICustomerRepository
     {
         public void AddCustomer(Customer customer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddRoute(Route route)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddVehicle(Vehicle vehicle)
         {
             throw new NotImplementedException();
         }
@@ -28,8 +17,29 @@ namespace InterfaceSegregationPrinciple
         {
             throw new NotImplementedException();
         }
+    }
 
-        public Route GetRoute(int id)
+    class DbCustomerRepository : ICustomerRepository
+    {
+        public void AddCustomer(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Customer GetCustomer(int id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    class DbVehicleRepository : IVehicleRepository
+    {
+        public void AddVehicle(Vehicle vehicle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Vehicle FindByRoute(Route route)
         {
             throw new NotImplementedException();
         }
@@ -45,18 +55,39 @@ namespace InterfaceSegregationPrinciple
         }
     }
 
-    interface IRepository
+  
+
+    interface ICustomerRepository
     {
         Customer GetCustomer(int id);
         void AddCustomer(Customer customer);
+    }
 
-        Vehicle GetVehicle(int id);       
+    interface IVehicleRepository : IQueryVehicleRepository, IUpdateVehicleRepository
+    {
+              
+    }
+
+    interface IQueryVehicleRepository
+    {
+        Vehicle GetVehicle(int id);
+        Vehicle GetVehicleByPlate(string plate);
+        Vehicle FindByRoute(Route route);
+    }
+
+    interface IUpdateVehicleRepository
+    {
         void AddVehicle(Vehicle vehicle);
+    }
 
+    interface IRouteRepository
+    {
         Route GetRoute(int id);
         void AddRoute(Route route);
-        Vehicle GetVehicleByPlate(string plate);
+        Route FindByVehicle(Vehicle vehicle);
     }
+
+
 
     class Customer { }
 

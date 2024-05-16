@@ -1,19 +1,31 @@
 ﻿
 Console.WriteLine("Hello, Interface Segregation Principle (ISP)!");
 
-IATM atm = new WithdrawOnlyATM(1000);
+IWithdrawCommand atm = new WithdrawOnlyATM(1000);
 
 atm.Withdraw(100);
 
-atm.Deposit(50);
+// atm.CheckBalance();
 
-atm.CheckBalance();
+public interface IWithdrawAndCheckBalanceCommand : IWithdrawCommand, ICheckBalanceCommand { }
 
 
-public interface IATM
+public interface IATM : IWithdrawCommand, IDepositCommand, ICheckBalanceCommand
+{     
+}
+
+public interface IWithdrawCommand
 {
-    bool Withdraw(decimal amount); // Wypłata
+    bool Withdraw(decimal amount); // Wypłata    
+}
+
+public interface IDepositCommand
+{
     void Deposit(decimal amount);  // Wpłata
+}
+
+public interface ICheckBalanceCommand
+{
     decimal CheckBalance();
 }
 
@@ -60,7 +72,7 @@ public class WithdrawAndDepositATM : IATM
 }
 
 
-public class WithdrawOnlyATM : IATM
+public class WithdrawOnlyATM : IWithdrawAndCheckBalanceCommand
 {
     private decimal balance;
 
@@ -73,12 +85,7 @@ public class WithdrawOnlyATM : IATM
     {
         return balance;
     }
-
-    public void Deposit(decimal amount)
-    {
-        throw new NotSupportedException();
-    }
-
+   
     public bool Withdraw(decimal amount)
     {
         if (amount > 0 && amount <= balance)
