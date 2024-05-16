@@ -1,5 +1,7 @@
 ﻿namespace DRY;
 
+#region Controller
+
 public interface IActionResult { }
 public class HttpPostAttribute : Attribute { }
 public class ModelState {
@@ -16,14 +18,17 @@ public class Controller
     public IActionResult Redirect(string url) { throw new NotImplementedException();  }
 }
 
+#endregion
+
 public class AccountController : Controller
 {
     [HttpPost]
     public IActionResult AddUsername(string newUsername)
     {
-        if (string.IsNullOrEmpty(newUsername) || newUsername.Length < 4)
+        if (!IsValidUsername(newUsername))
         {
-            ModelState.AddModelError("newUsername", "Username must be at least 4 characters.");
+            ModelState.AddModelError(nameof(newUsername), ErrorMessages.TooShortUsername);
+
             return View("AddUsername");
         }
 
@@ -36,9 +41,10 @@ public class AccountController : Controller
     [HttpPost]
     public IActionResult UpdateUsername(string newUsername)
     {
-        if (string.IsNullOrEmpty(newUsername) || newUsername.Length < 4)
+        if (!IsValidUsername(newUsername))
         {
-            ModelState.AddModelError("newUsername", "Username must be at least 4 characters.");
+            ModelState.AddModelError(nameof(newUsername), ErrorMessages.TooShortUsername);
+
             return View("ChangeUsername");
         }
 
@@ -48,5 +54,10 @@ public class AccountController : Controller
         return Redirect("/");
     }
 
-    
+    private static bool IsValidUsername(string newUsername)
+    {
+        return !string.IsNullOrEmpty(newUsername) && newUsername.Length >= 4;
+    }
+
+
 }
