@@ -4,7 +4,7 @@ namespace StatePattern
 {
     public class Order
     {
-        public Order(OrderStatus initialState = OrderStatus.Processing)
+        public Order(OrderStatus initialState = OrderStatus.Pending)
         {            
             Status = initialState;
         }
@@ -24,7 +24,11 @@ namespace StatePattern
                 if (IsPaid)
                 {
                     Status = OrderStatus.Processing;
-                }                
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
             }            
             else if (Status == OrderStatus.Processing)
             {

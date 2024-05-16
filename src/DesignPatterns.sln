@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StrategyPattern", "DesignPa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FacadePattern", "DesignPatterns\FacadePattern\FacadePattern.csproj", "{133E333A-1F43-4C30-9B41-D23CEDFFD985}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatePattern.UnitTests", "..\tests\StatePattern.UnitTests\StatePattern.UnitTests.csproj", "{BB69ECE0-A459-4A0D-81CB-907B192403C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,8 +41,15 @@ Global
 		{133E333A-1F43-4C30-9B41-D23CEDFFD985}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{133E333A-1F43-4C30-9B41-D23CEDFFD985}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{133E333A-1F43-4C30-9B41-D23CEDFFD985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB69ECE0-A459-4A0D-81CB-907B192403C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB69ECE0-A459-4A0D-81CB-907B192403C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB69ECE0-A459-4A0D-81CB-907B192403C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB69ECE0-A459-4A0D-81CB-907B192403C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F1721C9-13BA-4F25-A4F9-2753304975A0}
 	EndGlobalSection
 EndGlobal
