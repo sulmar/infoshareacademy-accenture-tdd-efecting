@@ -1,9 +1,24 @@
 ﻿Console.WriteLine("Hello, Dependency Inversion Principle (DIP)!");
 
+IRadioAdapter radioAdapter = RadioAdapterFactory.Create('M');
+
 var phoneService = new PhoneService();
-phoneService.UseRadio(new HyteraRadioAdapter());
+phoneService.UseRadio(radioAdapter);
 
 phoneService.SendMessage(1, "Hello World!");
 
-phoneService.UseRadio(new MotorolaRadioAdapter("1234"));
-phoneService.SendMessage(1, "Hello TDD!");
+
+class RadioAdapterFactory
+{
+    public static IRadioAdapter Create(char symbol)
+    {
+        switch(symbol)
+        {
+            case 'M' :  return new MotorolaRadioAdapter("1234");
+            case 'H': return new HyteraRadioAdapter();
+            default:
+                throw new NotSupportedException();
+        }
+    }
+    
+}
