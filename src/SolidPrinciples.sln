@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInversionPrincipl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiskovSubstitutionPrinciple", "SolidPrinciples\LiskovSubstitutionPrinciple\LiskovSubstitutionPrinciple.csproj", "{F2BF0B78-D9B8-470E-A687-73D05C23AECC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenClosedPrinciple.UnitTests", "..\tests\OpenClosedPrinciple.UnitTests\OpenClosedPrinciple.UnitTests.csproj", "{1986AEFC-EAF5-4F09-9C2C-4ABE972F683F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenClosedPrinciple.UnitTests", "..\tests\OpenClosedPrinciple.UnitTests\OpenClosedPrinciple.UnitTests.csproj", "{1986AEFC-EAF5-4F09-9C2C-4ABE972F683F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excercise", "..\..\infoshareacademy-accenture-tdd-efecting\src\SolidPrinciples\Excercise\Excercise.csproj", "{7F849858-C56C-4D0B-B86E-2B1D909C9978}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{1986AEFC-EAF5-4F09-9C2C-4ABE972F683F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1986AEFC-EAF5-4F09-9C2C-4ABE972F683F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1986AEFC-EAF5-4F09-9C2C-4ABE972F683F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F849858-C56C-4D0B-B86E-2B1D909C9978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F849858-C56C-4D0B-B86E-2B1D909C9978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F849858-C56C-4D0B-B86E-2B1D909C9978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F849858-C56C-4D0B-B86E-2B1D909C9978}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
