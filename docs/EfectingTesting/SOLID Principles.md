@@ -2,7 +2,7 @@
 _Zasada pojedynczej odpowiedzialności_
 
 - Każda klasa powinna być odpowiedzialna tylko za jedną konkretną rzecz. Oznacza to, że w szczególności powininen istnieć jeden konkretny powód do modyfikacji danej klasy.
-- 
+
 ## Open/Closed Principle (OCP)
 _Zasada otwarte-zamknięte_
 
