@@ -2,22 +2,28 @@
 Console.WriteLine("Hello, Open/Closed Principle (OCP)");
 
 
+// Abstract Strategy
+public interface IDiscount
+{
+    decimal Discount(Order order);
+}
+
 public class OrderCalculator
 {
+    private readonly IDiscount _discount;
+
+    public OrderCalculator(IDiscount discount)
+    {
+        _discount = discount;
+    }
+
     public decimal CalculateDiscount(Order order)
     {
-        if (order.OrderDate.Hour >= 9 && order.OrderDate.Hour <= 12)
-        {
-            return order.TotalAmount * 0.1m; // 10% 
-        }
-        if (order.Customer.Gender == Gender.Female)
-        {
-            return order.TotalAmount * 0.2m; // 20% 
-        }
-        else
-            return order.TotalAmount;
+        return order.TotalAmount - _discount.Discount(order);
 
         // TODO: dodaj obsługę kuponów rabatowych SAVE10NOW, DISCOUNT20OFF
+
+        // TODO: 10zł mniej w każdy piątek
     }
 }
 
@@ -26,6 +32,7 @@ public class Order
     public decimal TotalAmount { get; set; }
     public DateTime OrderDate { get; set; }
     public Customer Customer { get; set; }
+    public string Coupon { get; set; }
 }
 
 public class Customer
