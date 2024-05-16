@@ -1,5 +1,6 @@
 ﻿namespace YAGNI;
 
+
 public class Order { }
 
 public class OrderProcessor
@@ -14,14 +15,5 @@ public class OrderProcessor
         // Anulowanie zamówienia
     }
 
-    public void UpdateOrder(Order order)
-    {
-        // Aktualizacja zamówienia
-    }
-
-    public void GenerateInvoice(Order order)
-    {
-        // Generowanie faktury
-    }
 
 }
