@@ -5,7 +5,7 @@ Document doc2 = new TextDocument();
 
 doc1.Print(); // Output: "Printing a PDF document..."
 
-((TextDocument)doc2).Edit(); // This is Breaking the Liskov Substitution Principle
+doc2.Edit(); 
 
 
 public class Document
