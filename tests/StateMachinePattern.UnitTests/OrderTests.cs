@@ -1,3 +1,5 @@
+using System.Diagnostics.SymbolStore;
+
 namespace StateMachinePattern.UnitTests;
 
 public class OrderTests
@@ -7,6 +9,19 @@ public class OrderTests
     public OrderTests()
     {
         sut = new OrderProxy(OrderStatus.Pending);
+    }
+
+    [Fact]
+    public void Confirm_WhenPending_ShouldSetTryPaidCounter()
+    {
+        // Act
+        sut.Confirm();
+        sut.Confirm();
+        sut.Confirm();
+
+        // Assert
+        Assert.Equal(3, sut.TryPaidCounter);
+        Assert.Equal(OrderStatus.Canceled, sut.Status);
     }
 
     [Fact]
@@ -62,15 +77,15 @@ public class OrderTests
     }
 
     [Fact]
-    public void Confirm_WhenNotPaidConfirm_ShouldThrowInvalidOperationException()
+    public void Confirm_WhenNotPaidConfirm_ShouldStatusSetPending()
     {
         // Arrange
 
         // Act
-        Action act = () => sut.Confirm();
+        sut.Confirm();
 
         // Asssert
-        Assert.Throws<InvalidOperationException>(act);
+        Assert.Equal(OrderStatus.Pending, sut.Status);
     }
 
 
