@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
+using ReservationApi;
+using System.Net.Http.Json;
 
 namespace ReserverationApi.Tests;
 
@@ -15,11 +17,12 @@ public class ReservationTests
 
         // Act
         var response = await client.GetAsync($"api/reservations/{reservationId}");
-        var result = await response.Content.ReadAsStringAsync();
+        var result = await response.Content.ReadFromJsonAsync<ReservationResponse>();
 
         // Assert
         Assert.True(response.IsSuccessStatusCode);
-        Assert.Equal("1", result);
+        Assert.Equal(1, result.Id);
+        Assert.Equal("a", result.Place);
 
 
     }
