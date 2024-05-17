@@ -11,20 +11,21 @@ public class OrderTests
         Order sut = new Order();
 
         // Assert
-        Assert.Equal(OrderStatus.Pending, sut.Status);
+        Assert.IsType<PendingOrderState>(sut.State);
     }
 
     [Fact]
-    public void Confirm_WhenPassProcessing_ShouldStatusSetProccesing()
+    public void SetSate_WhenPassProcessing_ShouldStatusSetProccesing()
     {
         // Arrange
-        OrderStatus orderStatus = OrderStatus.Processing;
+        Order sut = new Order();
+        ProcessingOrderState orderStatus = new ProcessingOrderState(sut);
 
         // Act
-        Order sut = new Order(orderStatus);
+        sut.SetSate(orderStatus);
 
         // Assert
-        Assert.Equal(OrderStatus.Processing, sut.Status);
+        Assert.IsType<ProcessingOrderState>( sut.State);
     }
 
     [Fact]
@@ -38,7 +39,7 @@ public class OrderTests
         sut.Confirm();
 
         // Asssert
-        Assert.Equal(OrderStatus.Processing, sut.Status);
+        Assert.IsType<ProcessingOrderState>(sut.State);
     }
 
     [Fact]
@@ -53,7 +54,7 @@ public class OrderTests
         sut.Confirm();
 
         // Asssert
-        Assert.Equal(OrderStatus.Completed, sut.Status);
+        Assert.IsType<CompletedOrderState>(sut.State);
     }
 
     [Fact]
@@ -69,30 +70,60 @@ public class OrderTests
         Assert.Throws<InvalidOperationException>(act);
     }
 
-
-    [Theory]
-    [InlineData(OrderStatus.Pending)]
-    [InlineData(OrderStatus.Processing)]
-    public void Cancel_WhenOrderStatus_ShouldSetCanceledOrderStatus(OrderStatus orderStatus)
+    [Fact]
+    public void Cancel_WhenOrderStatusPending_ShouldSetCanceledOrderStatus()
     {
         // Arrange        
-        Order sut = new Order(orderStatus);
+        Order sut = new Order();
+        PendingOrderState orderState = new PendingOrderState(sut);
+        sut.SetSate(orderState);
+        
+        // Act
+        sut.Cancel();
+
+        // Assert
+        Assert.IsType<CanceledOrderState>(sut.State);
+    }
+
+    public void Cancel_WhenOrderStatusProcessing_ShouldSetCanceledOrderStatus()
+    {
+        // Arrange        
+        Order sut = new Order();
+        ProcessingOrderState orderState = new ProcessingOrderState(sut);
+        sut.SetSate(orderState);
 
         // Act
         sut.Cancel();
 
         // Assert
-        Assert.Equal(OrderStatus.Canceled, sut.Status);
+        Assert.IsType<CanceledOrderState>(sut.State);
     }
 
+  
 
-    [Theory]
-    [InlineData(OrderStatus.Completed)]
-    [InlineData(OrderStatus.Canceled)]
-    public void Cancel_WhenOrderStatus_ShouldThrowInvalidOperationException(OrderStatus orderStatus)
+
+    [Fact]
+    public void Cancel_WhenOrderCompletedStatus_ShouldThrowInvalidOperationException()
     {
         // Arrange        
-        Order sut = new Order(orderStatus);
+        Order sut = new Order();
+        CompletedOrderState orderState = new CompletedOrderState(sut);
+        sut.SetSate(orderState);
+
+        // Act
+        Action act = () => sut.Cancel();
+
+        // Assert
+        Assert.Throws<InvalidOperationException>(act);
+    }
+
+    [Fact]
+    public void Cancel_WhenOrderCanceledStatus_ShouldThrowInvalidOperationException()
+    {
+        // Arrange        
+        Order sut = new Order();
+        CanceledOrderState orderState = new CanceledOrderState(sut);
+        sut.SetSate(orderState);
 
         // Act
         Action act = () => sut.Cancel();

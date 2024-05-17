@@ -1,73 +1,60 @@
 ﻿using System;
 
-namespace StatePattern
+namespace StatePattern;
+
+
+// Abstract State
+public abstract class OrderState
 {
-    public class Order
-    {
-        public Order(OrderStatus initialState = OrderStatus.Pending)
-        {            
-            Status = initialState;
-        }
-
-        public OrderStatus Status { get; private set; }
-        public bool IsPaid { get; private set; }       
-
-        public void Paid()
-        {
-            IsPaid = true;
-        }
-
-        public void Confirm()
-        {
-            if (Status == OrderStatus.Pending)
-            {
-                if (IsPaid)
-                {
-                    Status = OrderStatus.Processing;
-                }
-                else
-                {
-                    throw new InvalidOperationException();
-                }
-            }            
-            else if (Status == OrderStatus.Processing)
-            {
-                Status = OrderStatus.Completed;
-            }
-            else
-            {
-                throw new InvalidOperationException();
-            }
-
-        }
-
-        public void Cancel()
-        {
-            if (Status == OrderStatus.Pending)
-            {
-                Status = OrderStatus.Canceled;
-            }
-            else if (Status == OrderStatus.Processing)
-            {
-                Status = OrderStatus.Canceled;
-            }
-            else
-            {
-                throw new InvalidOperationException();
-            }
-        }
-
-        public override string ToString() => $"Order {Environment.NewLine}";
-        
-    }
-
-    public enum OrderStatus
-    {
-        // The customer places an order on the company's website
-        Pending,
-        Processing,      
-        Completed,
-        Canceled
-    }
-
+    public abstract void Confirm();
+    public abstract void Cancel();
 }
+
+public class Order
+{
+    public Order()
+    {
+        State = new PendingOrderState(this);
+    }
+
+    public Order(OrderState initialState)
+    {            
+        State = initialState;
+    }
+
+    public OrderState State { get; private set; }
+
+    public void SetSate(OrderState newState)
+    {
+        this.State = newState;
+    }
+
+    public bool IsPaid { get; private set; }       
+
+    public void Paid()
+    {
+        IsPaid = true;
+    }
+
+    public void Confirm()
+    {
+        State.Confirm();
+    }
+
+    public void Cancel()
+    {
+        State.Cancel();
+    }
+
+    public override string ToString() => $"Order {Environment.NewLine}";
+    
+}
+
+//public enum OrderStatus
+//{
+//    // The customer places an order on the company's website
+//    Pending,
+//    Processing,      
+//    Completed,
+//    Canceled
+//}
