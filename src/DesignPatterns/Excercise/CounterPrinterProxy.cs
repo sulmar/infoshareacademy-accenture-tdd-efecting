@@ -15,3 +15,22 @@ public partial interface IPrinter
         }
     }
 }
+
+
+public interface ILogger
+{
+    void Log(string message);
+}
+
+public class DbPrinterProxy(IPrinter printer, ILogger logger) : IPrinter
+{
+    public int Counter => throw new NotImplementedException();
+
+    public void Print(string document, int copies = 1)
+    {
+        // Real subject
+        printer.Print(document, copies);
+
+        logger.Log(document);
+    }
+}
