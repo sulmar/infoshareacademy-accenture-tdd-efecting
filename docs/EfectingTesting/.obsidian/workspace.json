@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "16efe46ae1abd6f6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Testy integracyjne.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CleanCode.md",
+                "file": "Testy integracyjne.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "CleanCode.md",
+                "file": "Testy integracyjne.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CleanCode.md"
+                "file": "Testy integracyjne.md"
               }
             }
           }
@@ -146,11 +159,12 @@
       "command-palette:Otwórz paletę poleceń": false
     }
   },
-  "active": "a26c4e5ba9737f4c",
+  "active": "16efe46ae1abd6f6",
   "lastOpenFiles": [
+    "CleanCode.md",
+    "Testy integracyjne.md",
     "Fundamentals Principles.md",
     "Spis treści.md",
-    "SOLID Principles.md",
-    "CleanCode.md"
+    "SOLID Principles.md"
   ]
 }
