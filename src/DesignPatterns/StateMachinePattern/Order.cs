@@ -1,4 +1,6 @@
 ﻿using Stateless;
+using System.Diagnostics;
+using System.Reflection.PortableExecutable;
 
 namespace StateMachinePattern;
 
@@ -28,6 +30,10 @@ public class OrderProxy : Order
         _machine.Configure(OrderStatus.Processing)
             .Permit(OrderTrigger.Confirm, OrderStatus.Completed)
             .Permit(OrderTrigger.Cancel, OrderStatus.Canceled);
+
+        // Wyświetlanie przejść podczas działania maszyny
+        _machine.OnTransitioned(transition => Debug.WriteLine($"{DateTime.Now} {transition.Trigger} : {transition.Source} -> {transition.Destination}"));
+
     }
 
 
