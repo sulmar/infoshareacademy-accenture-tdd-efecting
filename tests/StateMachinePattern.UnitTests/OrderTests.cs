@@ -2,13 +2,20 @@ namespace StateMachinePattern.UnitTests;
 
 public class OrderTests
 {
+    Order sut; 
+
+    public OrderTests()
+    {
+        sut = new OrderProxy(OrderStatus.Pending);
+    }
+
     [Fact]
     public void Confirm_WhenCreate_ShouldStatusSetPending()
     {
         // Arrange
 
         // Act
-        Order sut = new Order();
+        Order sut = new OrderProxy();
 
         // Assert
         Assert.Equal(OrderStatus.Pending, sut.Status);
@@ -21,7 +28,7 @@ public class OrderTests
         OrderStatus orderStatus = OrderStatus.Processing;
 
         // Act
-        Order sut = new Order(orderStatus);
+        Order sut = new OrderProxy(orderStatus);
 
         // Assert
         Assert.Equal(OrderStatus.Processing, sut.Status);
@@ -31,7 +38,6 @@ public class OrderTests
     public void Confirm_WhenIsPaidConfirm_ShouldStatusSetProcessing()
     {
         // Arrange
-        Order sut = new Order();
         sut.Paid();
 
         // Act
@@ -45,7 +51,6 @@ public class OrderTests
     public void Confirm_WhenIsProcessingConfirm_ShouldStatusSetCompleted()
     {
         // Arrange
-        Order sut = new Order();
         sut.Paid();
         sut.Confirm();
 
@@ -60,7 +65,6 @@ public class OrderTests
     public void Confirm_WhenNotPaidConfirm_ShouldThrowInvalidOperationException()
     {
         // Arrange
-        Order sut = new Order();
 
         // Act
         Action act = () => sut.Confirm();
@@ -76,7 +80,7 @@ public class OrderTests
     public void Cancel_WhenOrderStatus_ShouldSetCanceledOrderStatus(OrderStatus orderStatus)
     {
         // Arrange        
-        Order sut = new Order(orderStatus);
+        Order sut = new OrderProxy(orderStatus);
 
         // Act
         sut.Cancel();
@@ -92,7 +96,7 @@ public class OrderTests
     public void Cancel_WhenOrderStatus_ShouldThrowInvalidOperationException(OrderStatus orderStatus)
     {
         // Arrange        
-        Order sut = new Order(orderStatus);
+        Order sut = new OrderProxy(orderStatus);
 
         // Act
         Action act = () => sut.Cancel();

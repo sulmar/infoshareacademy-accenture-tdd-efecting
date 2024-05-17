@@ -1,5 +1,28 @@
 ﻿namespace StateMachinePattern;
 
+// Wzorzec Proxy
+// wariant klasowy
+public class OrderProxy : Order
+{
+    public OrderProxy(OrderStatus orderStatus = OrderStatus.Pending)
+        : base(orderStatus)
+    {        
+    }
+
+
+    public override OrderStatus Status => base.Status;
+
+    public override void Confirm()
+    {
+        base.Confirm();
+    }
+
+    public override void Cancel()
+    {
+        base.Cancel();
+    }
+}
+
 public class Order
 {
     public Order(OrderStatus initialState = OrderStatus.Pending)
@@ -7,7 +30,7 @@ public class Order
         Status = initialState;
     }
 
-    public OrderStatus Status { get; private set; }
+    public virtual OrderStatus Status { get; private set; }
     public bool IsPaid { get; private set; }
 
     public void Paid()
@@ -15,7 +38,7 @@ public class Order
         IsPaid = true;
     }
 
-    public void Confirm()
+    public virtual void Confirm()
     {
         if (Status == OrderStatus.Pending)
         {
@@ -37,7 +60,7 @@ public class Order
 
     }
 
-    public void Cancel()
+    public virtual void Cancel()
     {
         if (Status == OrderStatus.Pending)
         {
