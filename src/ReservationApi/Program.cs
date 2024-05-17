@@ -1,9 +1,14 @@
+using Microsoft.EntityFrameworkCore;
 using ReservationApi;
 using ReservationApi.Abstractions;
+using ReservationApi.Infrastructure;
 using ReservationApi.Model;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddScoped<IReservationRepository, NullReservationRepository>();
+builder.Services.AddScoped<IReservationRepository, DbReservationRepository>();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbReservation")));
+
 var app = builder.Build();
 
 app.MapGet("/", () => Results.Ok());

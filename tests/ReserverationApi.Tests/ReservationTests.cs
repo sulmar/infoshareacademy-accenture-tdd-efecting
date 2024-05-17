@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using ReservationApi;
 using ReservationApi.Abstractions;
+using ReservationApi.Infrastructure;
 using ReservationApi.Model;
 using System.Net.Http.Json;
 
@@ -23,7 +27,29 @@ public class ReservationTests
             {
                 builder.ConfigureServices(services =>
                 {
-                    services.AddScoped<IReservationRepository, FakeReservationRepository>();
+                    services.RemoveAll(typeof(DbContextOptions<ApplicationDbContext>));
+
+                    services.AddScoped<IReservationRepository, DbReservationRepository>();
+
+                    var configuration = new ConfigurationBuilder()
+                    .AddUserSecrets<ReservationTests>()
+                    .Build();
+
+                    string connectionString = configuration.GetConnectionString("DbReservation");
+
+                    services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseSqlServer(connectionString));
+
+                    var serviceProvider = services.BuildServiceProvider();
+                    var scope = serviceProvider.CreateScope();
+                    var db = scope.ServiceProvider.GetService<ApplicationDbContext>();
+
+                    db.Database.EnsureDeleted();
+                    db.Database.EnsureCreated();
+
+                    db.Reservations.Add(new Reservation { Place = "a" });
+                    db.SaveChanges();
+
                 });
             });
         var client = factory.CreateClient();
