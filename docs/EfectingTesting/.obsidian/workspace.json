@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SOLID Principles.md",
+                "file": "CleanCode.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SOLID Principles.md",
+                "file": "CleanCode.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SOLID Principles.md",
+                "file": "CleanCode.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SOLID Principles.md"
+                "file": "CleanCode.md"
               }
             }
           }
@@ -149,8 +149,8 @@
   "active": "a26c4e5ba9737f4c",
   "lastOpenFiles": [
     "Fundamentals Principles.md",
+    "Spis treści.md",
     "SOLID Principles.md",
-    "CleanCode.md",
-    "Spis treści.md"
+    "CleanCode.md"
   ]
 }

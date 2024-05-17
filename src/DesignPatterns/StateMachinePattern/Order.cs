@@ -1,25 +1,39 @@
-﻿namespace StateMachinePattern;
+﻿using Stateless;
+
+namespace StateMachinePattern;
+
+// dotnet add package Stateless
 
 // Wzorzec Proxy
 // wariant klasowy
 public class OrderProxy : Order
 {
+    private readonly StateMachine<OrderStatus, OrderTrigger> _machine; 
+
     public OrderProxy(OrderStatus orderStatus = OrderStatus.Pending)
         : base(orderStatus)
-    {        
+    {
+        _machine = new StateMachine<OrderStatus, OrderTrigger>(orderStatus);
+
+        _machine.Configure(OrderStatus.Pending)
+            .PermitIf(OrderTrigger.Confirm, OrderStatus.Processing, ()=>IsPaid)
+            .Permit(OrderTrigger.Cancel, OrderStatus.Canceled);
+
+        _machine.Configure(OrderStatus.Processing)
+            .Permit(OrderTrigger.Confirm, OrderStatus.Completed)
+            .Permit(OrderTrigger.Cancel, OrderStatus.Canceled);
     }
 
-
-    public override OrderStatus Status => base.Status;
+    public override OrderStatus Status => _machine.State;
 
     public override void Confirm()
     {
-        base.Confirm();
+        _machine.Fire(OrderTrigger.Confirm);
     }
 
     public override void Cancel()
     {
-        base.Cancel();
+        _machine.Fire(OrderTrigger.Cancel);
     }
 }
 
@@ -87,4 +101,11 @@ public enum OrderStatus
     Processing,
     Completed,
     Canceled
+}
+
+
+public enum OrderTrigger
+{
+    Confirm,
+    Cancel
 }
