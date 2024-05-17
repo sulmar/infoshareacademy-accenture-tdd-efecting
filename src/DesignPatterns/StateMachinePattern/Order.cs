@@ -12,8 +12,6 @@ public class OrderProxy : Order
 {
     private readonly StateMachine<OrderStatus, OrderTrigger> _machine;
 
-
-
     public OrderProxy(OrderStatus orderStatus = OrderStatus.Pending)
         : base(orderStatus)
     {
@@ -33,7 +31,6 @@ public class OrderProxy : Order
 
         // Wyświetlanie przejść podczas działania maszyny
         _machine.OnTransitioned(transition => Debug.WriteLine($"{DateTime.Now} {transition.Trigger} : {transition.Source} -> {transition.Destination}"));
-
     }
 
 
